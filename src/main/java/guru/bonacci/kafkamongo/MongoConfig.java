@@ -35,12 +35,12 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
 
     @Override
     protected String getDatabaseName() {
-        return "test";
+        return "foo";
     }
 
     @Override
     public MongoClient mongoClient() {
-      final ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017/test");
+      final ConnectionString connectionString = new ConnectionString("mongodb://....=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000");
       final MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
           .applyConnectionString(connectionString)
           .build();

@@ -1,22 +1,21 @@
 package guru.bonacci.kafkamongo;
 
 
+import java.util.UUID;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import guru.bonacci.kafkamongo.domain.MongoFoo;
+import guru.bonacci.kafkamongo.domain.Bar;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @SpringBootApplication
-@EnableTransactionManagement
 @RequiredArgsConstructor
 public class AppHeroesAdmin implements CommandLineRunner {
 
-  private final FooService serv;
   private final FooRepository repo;
 
   
@@ -27,13 +26,10 @@ public class AppHeroesAdmin implements CommandLineRunner {
 	@Override
   public void run(String... args) throws Exception {
 
-    repo.deleteAll();
-
     log.info("save a couple");
     try {
-      serv.create(new MongoFoo("Alice", "one"));
-      serv.create(new MongoFoo("Alice", "two"));
-      serv.create(new MongoFoo("Alice", null));
+      repo.save(new Bar(UUID.randomUUID().toString(), "..."));
+      repo.save(new Bar(UUID.randomUUID().toString(), "..."));
     } catch (RuntimeException e) {
       e.printStackTrace();
     }
@@ -43,7 +39,7 @@ public class AppHeroesAdmin implements CommandLineRunner {
     
     // fetch all customers
     log.info("-------------------------------");
-    for (MongoFoo foo : repo.findAll()) {
+    for (Bar foo : repo.findAll()) {
       log.info(foo.toString());
     }
     log.info("-------------------------------");

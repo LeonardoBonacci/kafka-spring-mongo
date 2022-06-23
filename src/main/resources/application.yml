@@ -1,12 +1,6 @@
 spring.application.name: app
 
 spring:
-  kafka:
-    producer:
-      transaction-id-prefix: tx-
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-  
   jackson.mapper.accept-case-insensitive-enums: true
 
 logging.level.org.springframework.transaction: trace
